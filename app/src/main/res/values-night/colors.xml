@@ -1,0 +1,12 @@
+<resources>
+    <color name="app_bg">#202A33</color>
+    <color name="card_bg">#2B353E</color>
+    <color name="input_bg">#46515B</color>
+    <color name="primary_text">#F5F6F8</color>
+    <color name="secondary_text">#BFC7CE</color>
+    <color name="accent_color">#F5F6F8</color>
+    <color name="button_bg">#F5F6F8</color>
+    <color name="button_text">#202A33</color>
+    <color name="border_color">#77838D</color>
+    <color name="icon_color">#F5F6F8</color>
+</resources>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "524467772847",
+    "project_id": "printease-4daa1",
+    "storage_bucket": "printease-4daa1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:524467772847:android:957d5a74690b2683b4a35a",
+        "android_client_info": {
+          "package_name": "com.example.printease"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIjcupushr_n_3k98m7TQVZjsoSytfCLw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

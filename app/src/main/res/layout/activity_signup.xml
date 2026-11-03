@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_bg"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingTop="28dp"
+        android:paddingBottom="32dp">
+
+        <ImageView
+            android:id="@+id/ivSignupLogo"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:contentDescription="PrintEase logo"
+            android:src="@drawable/ic_printease_logo"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/tvSignupTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Create Account"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/_26ssp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/ivSignupLogo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/tvSignupSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Join PrintEase and make printing easier"
+            android:textColor="@color/secondary_text"
+            android:textSize="@dimen/_13ssp"
+            app:layout_constraintTop_toBottomOf="@id/tvSignupTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/tvNameLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:text="Full Name"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/tvSignupSubtitle" />
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_input"
+            android:hint="Enter your full name"
+            android:inputType="textPersonName|textCapWords"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:singleLine="true"
+            android:textColor="@color/primary_text"
+            android:textColorHint="@color/secondary_text"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintTop_toBottomOf="@id/tvNameLabel" />
+
+        <TextView
+            android:id="@+id/tvEmailLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:text="Email Address"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/etName" />
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_input"
+            android:hint="Enter your email"
+            android:inputType="textEmailAddress"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:singleLine="true"
+            android:textColor="@color/primary_text"
+            android:textColorHint="@color/secondary_text"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintTop_toBottomOf="@id/tvEmailLabel" />
+
+        <TextView
+            android:id="@+id/tvPhoneLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:text="Mobile Number"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/etEmail" />
+
+        <EditText
+            android:id="@+id/etPhone"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_input"
+            android:hint="Enter 10-digit mobile number"
+            android:inputType="phone"
+            android:maxLength="10"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:singleLine="true"
+            android:textColor="@color/primary_text"
+            android:textColorHint="@color/secondary_text"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintTop_toBottomOf="@id/tvPhoneLabel" />
+
+        <TextView
+            android:id="@+id/tvPasswordLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:text="Password"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/etPhone" />
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_input"
+            android:hint="Create a password"
+            android:inputType="textPassword"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:singleLine="true"
+            android:textColor="@color/primary_text"
+            android:textColorHint="@color/secondary_text"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintTop_toBottomOf="@id/tvPasswordLabel" />
+
+        <TextView
+            android:id="@+id/tvConfirmPasswordLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:text="Confirm Password"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/etPassword" />
+
+        <EditText
+            android:id="@+id/etConfirmPassword"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_input"
+            android:hint="Re-enter your password"
+            android:inputType="textPassword"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:singleLine="true"
+            android:textColor="@color/primary_text"
+            android:textColorHint="@color/secondary_text"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintTop_toBottomOf="@id/tvConfirmPasswordLabel" />
+
+        <Button
+            android:id="@+id/btnCreateAccount"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="26dp"
+            android:background="@drawable/bg_button"
+            android:backgroundTint="@null"
+            android:text="Create Account"
+            android:textAllCaps="false"
+            android:textColor="@color/button_text"
+            android:textSize="@dimen/_16ssp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/etConfirmPassword" />
+
+        <TextView
+            android:id="@+id/tvAlreadyAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:padding="8dp"
+            android:text="Already have an account? Login"
+            android:textColor="@color/accent_color"
+            android:textSize="@dimen/_13ssp"
+            app:layout_constraintTop_toBottomOf="@id/btnCreateAccount"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
