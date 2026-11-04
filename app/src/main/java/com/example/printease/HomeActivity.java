@@ -1,9 +1,9 @@
+
 package com.example.printease;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -34,26 +34,36 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(new Intent(HomeActivity.this, UploadPrintActivity.class)));
 
         findViewById(R.id.btnFindShops).setOnClickListener(v ->
-                startActivity(new Intent(HomeActivity.this, ShopListActivity.class))
-        );
+                startActivity(new Intent(HomeActivity.this, ShopListActivity.class)));
 
         findViewById(R.id.btnMyOrders).setOnClickListener(v ->
-                Toast.makeText(this, "My Orders feature coming next", Toast.LENGTH_SHORT).show());
+                openMyOrders());
 
         findViewById(R.id.navHome).setOnClickListener(v -> {});
 
         findViewById(R.id.navOrders).setOnClickListener(v ->
-                Toast.makeText(this, "My Orders coming next", Toast.LENGTH_SHORT).show());
+                openMyOrders());
 
         findViewById(R.id.navShops).setOnClickListener(v ->
-                startActivity(new Intent(HomeActivity.this, ShopListActivity.class))
-        );
+                startActivity(new Intent(HomeActivity.this, ShopListActivity.class)));
 
         findViewById(R.id.navProfile).setOnClickListener(v ->
-                Toast.makeText(this, "Customer Profile coming next", Toast.LENGTH_SHORT).show());
+                android.widget.Toast.makeText(
+                        this,
+                        "Customer Profile coming next",
+                        android.widget.Toast.LENGTH_SHORT
+                ).show());
 
         findViewById(R.id.ivNotification).setOnClickListener(v ->
-                Toast.makeText(this, "No new notifications", Toast.LENGTH_SHORT).show());
+                android.widget.Toast.makeText(
+                        this,
+                        "No new notifications",
+                        android.widget.Toast.LENGTH_SHORT
+                ).show());
+    }
+
+    private void openMyOrders() {
+        startActivity(new Intent(HomeActivity.this, MyOrdersActivity.class));
     }
 
     private void loadCustomerDetails() {

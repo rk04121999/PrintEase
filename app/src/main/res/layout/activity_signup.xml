@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:background="@color/app_bg"
     android:fillViewport="true">
 
@@ -191,7 +192,7 @@
             android:layout_height="56dp"
             android:layout_marginTop="26dp"
             android:background="@drawable/bg_button"
-            android:backgroundTint="@null"
+            app:backgroundTint="@null"
             android:text="Create Account"
             android:textAllCaps="false"
             android:textColor="@color/button_text"

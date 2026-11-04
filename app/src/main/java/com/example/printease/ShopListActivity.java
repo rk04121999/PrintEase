@@ -108,24 +108,25 @@ public class ShopListActivity extends AppCompatActivity {
                         LinearLayout.LayoutParams.WRAP_CONTENT
                 );
 
-        cardParams.setMargins(0, 0, 0, 16);
+        cardParams.setMargins(0, 0, 0, dp(16));
 
         card.setLayoutParams(cardParams);
-        card.setRadius(18);
-        card.setCardElevation(2);
-        card.setStrokeWidth(1);
+        card.setRadius(dp(22));
+        card.setCardElevation(dp(4));
+        card.setStrokeWidth(dp(1));
         card.setStrokeColor(
-                ContextCompat.getColor(this, R.color.border_color)
+                ContextCompat.getColor(this, R.color.glass_border)
         );
         card.setCardBackgroundColor(
-                ContextCompat.getColor(this, R.color.card_bg)
+                ContextCompat.getColor(this, R.color.glass_bg)
         );
+        card.setUseCompatPadding(false);
         card.setClickable(true);
         card.setFocusable(true);
 
         LinearLayout content = new LinearLayout(this);
         content.setOrientation(LinearLayout.VERTICAL);
-        content.setPadding(20, 18, 20, 18);
+        content.setPadding(dp(20), dp(20), dp(20), dp(20));
 
         TextView name = createText(
                 safeText(shopName),
@@ -156,16 +157,16 @@ public class ShopListActivity extends AppCompatActivity {
         );
 
         TextView status = createText(
-                hasPrintDetails ? "Select this shop →" : "Verified Print Shop",
+                hasPrintDetails ? "Select this shop →" : "✓ Verified Print Shop",
                 14,
                 R.color.accent_color,
                 true
         );
 
-        owner.setPadding(0, 12, 0, 0);
-        shopAddress.setPadding(0, 8, 0, 0);
-        contact.setPadding(0, 8, 0, 0);
-        status.setPadding(0, 14, 0, 0);
+        owner.setPadding(0, dp(12), 0, 0);
+        shopAddress.setPadding(0, dp(9), 0, 0);
+        contact.setPadding(0, dp(9), 0, 0);
+        status.setPadding(0, dp(17), 0, 0);
 
         content.addView(name);
         content.addView(owner);
@@ -227,5 +228,11 @@ public class ShopListActivity extends AppCompatActivity {
         }
 
         return value;
+    }
+
+    private int dp(float value) {
+        return Math.round(
+                value * getResources().getDisplayMetrics().density
+        );
     }
 }

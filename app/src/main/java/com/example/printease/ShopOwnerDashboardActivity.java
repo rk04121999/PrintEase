@@ -1,7 +1,9 @@
+
 package com.example.printease;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -16,7 +18,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -102,8 +103,8 @@ public class ShopOwnerDashboardActivity extends AppCompatActivity {
                     tvOrderCount.setText("Total Orders: " + count);
 
                     if (count == 0) {
-                        tvEmpty.setVisibility(View.VISIBLE);
                         tvEmpty.setText("No orders received yet.");
+                        tvEmpty.setVisibility(View.VISIBLE);
                         return;
                     }
 
@@ -113,8 +114,8 @@ public class ShopOwnerDashboardActivity extends AppCompatActivity {
                 })
                 .addOnFailureListener(e -> {
                     progressBar.setVisibility(View.GONE);
-                    tvEmpty.setVisibility(View.VISIBLE);
                     tvEmpty.setText("Unable to load orders.");
+                    tvEmpty.setVisibility(View.VISIBLE);
                     Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
                 });
     }
@@ -147,16 +148,18 @@ public class ShopOwnerDashboardActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
 
-        cardParams.setMargins(0, 0, 0, 16);
+        cardParams.setMargins(0, 0, 0, dpToPx(16));
 
         card.setLayoutParams(cardParams);
-        card.setRadius(16);
-        card.setCardElevation(3);
-        card.setCardBackgroundColor(getColor(R.color.card_bg));
+        card.setRadius(dpToPx(22));
+        card.setCardElevation(dpToPx(3));
+        card.setCardBackgroundColor(getColor(R.color.glass_bg));
+        card.setStrokeWidth(dpToPx(1));
+        card.setStrokeColor(getColor(R.color.glass_border));
 
         LinearLayout content = new LinearLayout(this);
         content.setOrientation(LinearLayout.VERTICAL);
-        content.setPadding(18, 18, 18, 18);
+        content.setPadding(dpToPx(18), dpToPx(18), dpToPx(18), dpToPx(18));
 
         TextView tvCustomer = createText("Customer: " + customerName, 18, true);
         TextView tvEmail = createText(customerEmail, 13, false);
@@ -176,6 +179,14 @@ public class ShopOwnerDashboardActivity extends AppCompatActivity {
                 "Status: " + status.replace("_", " "), 15, true
         );
 
+        tvEmail.setTextColor(getColor(R.color.secondary_text));
+        tvPages.setTextColor(getColor(R.color.secondary_text));
+        tvPaper.setTextColor(getColor(R.color.secondary_text));
+        tvPrint.setTextColor(getColor(R.color.secondary_text));
+        tvPrice.setTextColor(getColor(R.color.accent_color));
+
+        setStatusColor(tvStatus, status);
+
         content.addView(tvCustomer);
         content.addView(tvEmail);
         content.addView(tvFile);
@@ -185,16 +196,28 @@ public class ShopOwnerDashboardActivity extends AppCompatActivity {
         content.addView(tvPrice);
         content.addView(tvStatus);
 
-        if ("AWAITING_DOCUMENT".equals(status)) {
+        addStatusButtons(content, orderId, status);
 
-            LinearLayout buttonRow = new LinearLayout(this);
-            buttonRow.setOrientation(LinearLayout.HORIZONTAL);
-            buttonRow.setGravity(Gravity.CENTER);
-            buttonRow.setPadding(0, 16, 0, 0);
+        card.addView(content);
+        ordersContainer.addView(card);
+    }
+
+    private void addStatusButtons(
+            LinearLayout content,
+            String orderId,
+            String status
+    ) {
+
+        LinearLayout buttonRow = new LinearLayout(this);
+        buttonRow.setOrientation(LinearLayout.HORIZONTAL);
+        buttonRow.setGravity(Gravity.CENTER);
+        buttonRow.setPadding(0, dpToPx(16), 0, 0);
+
+        if ("AWAITING_DOCUMENT".equals(status)) {
 
             MaterialButton acceptButton = createButton(
                     "Accept Order",
-                    Color.rgb(46, 125, 50)
+                    getColor(R.color.button_bg)
             );
 
             MaterialButton rejectButton = createButton(
@@ -224,11 +247,95 @@ public class ShopOwnerDashboardActivity extends AppCompatActivity {
             buttonRow.addView(acceptButton);
             buttonRow.addView(rejectButton);
 
-            content.addView(buttonRow);
+        } else {
+
+            String nextStatus = getNextStatus(status);
+
+            if (nextStatus == null) {
+                return;
+            }
+
+            String buttonText;
+
+            switch (nextStatus) {
+                case "PRINTING":
+                    buttonText = "Start Printing";
+                    break;
+                case "READY":
+                    buttonText = "Mark Ready";
+                    break;
+                case "COMPLETED":
+                    buttonText = "Mark Completed";
+                    break;
+                default:
+                    return;
+            }
+
+            MaterialButton nextButton = createButton(
+                    buttonText,
+                    getColor(R.color.button_bg)
+            );
+
+            nextButton.setLayoutParams(
+                    new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            dpToPx(52)
+                    )
+            );
+
+            nextButton.setOnClickListener(v ->
+                    showOrderConfirmation(orderId, nextStatus));
+
+            buttonRow.addView(nextButton);
         }
 
-        card.addView(content);
-        ordersContainer.addView(card);
+        content.addView(buttonRow);
+    }
+
+    private String getNextStatus(String currentStatus) {
+
+        switch (currentStatus) {
+            case "ACCEPTED":
+                return "PRINTING";
+
+            case "PRINTING":
+                return "READY";
+
+            case "READY":
+                return "COMPLETED";
+
+            default:
+                return null;
+        }
+    }
+
+    private void setStatusColor(TextView textView, String status) {
+
+        switch (status) {
+            case "ACCEPTED":
+                textView.setTextColor(Color.rgb(46, 125, 50));
+                break;
+
+            case "PRINTING":
+                textView.setTextColor(Color.rgb(21, 101, 192));
+                break;
+
+            case "READY":
+                textView.setTextColor(Color.rgb(0, 121, 107));
+                break;
+
+            case "COMPLETED":
+                textView.setTextColor(Color.rgb(46, 125, 50));
+                break;
+
+            case "REJECTED":
+                textView.setTextColor(Color.rgb(198, 40, 40));
+                break;
+
+            default:
+                textView.setTextColor(getColor(R.color.accent_color));
+                break;
+        }
     }
 
     private MaterialButton createButton(String text, int backgroundColor) {
@@ -243,7 +350,7 @@ public class ShopOwnerDashboardActivity extends AppCompatActivity {
         button.setTypeface(null, Typeface.BOLD);
 
         button.setBackgroundTintList(
-                android.content.res.ColorStateList.valueOf(backgroundColor)
+                ColorStateList.valueOf(backgroundColor)
         );
 
         button.setCornerRadius(dpToPx(12));
@@ -258,23 +365,46 @@ public class ShopOwnerDashboardActivity extends AppCompatActivity {
 
     private void showOrderConfirmation(String orderId, String newStatus) {
 
-        boolean accepting = "ACCEPTED".equals(newStatus);
+        String title;
+        String message;
 
-        String title = accepting
-                ? "Confirm Order Acceptance"
-                : "Confirm Order Rejection";
+        switch (newStatus) {
+            case "ACCEPTED":
+                title = "Accept Order";
+                message = "Are you sure you want to accept this order?";
+                break;
 
-        String message = accepting
-                ? "Are you sure you want to accept this order?"
-                : "Are you sure you want to reject this order?";
+            case "REJECTED":
+                title = "Reject Order";
+                message = "Are you sure you want to reject this order?";
+                break;
+
+            case "PRINTING":
+                title = "Start Printing";
+                message = "Have you started printing this order?";
+                break;
+
+            case "READY":
+                title = "Mark Order Ready";
+                message = "Confirm that this order is ready for collection?";
+                break;
+
+            case "COMPLETED":
+                title = "Complete Order";
+                message = "Confirm that this order has been completed?";
+                break;
+
+            default:
+                return;
+        }
 
         new AlertDialog.Builder(this)
                 .setTitle(title)
                 .setMessage(message)
-                .setPositiveButton("Yes", (dialog, which) -> {
-                    updateOrderStatus(orderId, newStatus);
-                })
-                .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
+                .setPositiveButton("Yes", (dialog, which) ->
+                        updateOrderStatus(orderId, newStatus))
+                .setNegativeButton("Cancel", (dialog, which) ->
+                        dialog.dismiss())
                 .setCancelable(true)
                 .show();
     }
@@ -287,12 +417,36 @@ public class ShopOwnerDashboardActivity extends AppCompatActivity {
                         "updatedAt", FieldValue.serverTimestamp()
                 )
                 .addOnSuccessListener(unused -> {
-                    String message = "ACCEPTED".equals(newStatus)
-                            ? "Order accepted successfully"
-                            : "Order rejected successfully";
+
+                    String message;
+
+                    switch (newStatus) {
+                        case "ACCEPTED":
+                            message = "Order accepted successfully";
+                            break;
+
+                        case "REJECTED":
+                            message = "Order rejected successfully";
+                            break;
+
+                        case "PRINTING":
+                            message = "Printing started successfully";
+                            break;
+
+                        case "READY":
+                            message = "Order marked as ready";
+                            break;
+
+                        case "COMPLETED":
+                            message = "Order completed successfully";
+                            break;
+
+                        default:
+                            message = "Order status updated";
+                            break;
+                    }
 
                     Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-
                     loadOrders();
                 })
                 .addOnFailureListener(e ->
@@ -319,7 +473,7 @@ public class ShopOwnerDashboardActivity extends AppCompatActivity {
         textView.setText(value);
         textView.setTextSize(size);
         textView.setTextColor(getColor(R.color.primary_text));
-        textView.setPadding(0, 4, 0, 4);
+        textView.setPadding(0, dpToPx(4), 0, dpToPx(4));
 
         if (bold) {
             textView.setTypeface(null, Typeface.BOLD);

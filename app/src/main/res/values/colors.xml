@@ -1,14 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="app_bg">#F4F6F9</color>
-    <color name="card_bg">#FFFFFF</color>
-    <color name="input_bg">#F0F2F5</color>
-    <color name="primary_text">#202A35</color>
-    <color name="secondary_text">#758292</color>
-    <color name="border_color">#DCE2E9</color>
-    <color name="button_bg">#202A35</color>
+    <color name="app_bg">#a7c6eb</color>
+    <color name="card_bg">#F7FCFF</color>
+    <color name="input_bg">#EAF7FC</color>
+    <color name="primary_text">#173B55</color>
+    <color name="secondary_text">#668397</color>
+    <color name="border_color">#B9DCEB</color>
+    <color name="button_bg">#168BC4</color>
     <color name="button_text">#FFFFFF</color>
-    <color name="icon_color">#202A35</color>
-    <color name="accent_color">#536779</color>
+    <color name="icon_color">#168BC4</color>
+    <color name="accent_color">#36A9D6</color>
     <color name="error_color">#D32F2F</color>
+    <color name="glass_bg">#b3cce8</color>
+    <color name="glass_border">#BFFFFFFF</color>
+    <color name="input_glass_bg">#CCEDF8FC</color>
+    <color name="button_gradient_start">#4FC3F7</color>
+    <color name="button_gradient_end">#087EA4</color>
 </resources>
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--OLD COLOR CODE-->
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<resources>-->
+<!--    <color name="app_bg">#F4F6F9</color>-->
+<!--    <color name="card_bg">#FFFFFF</color>-->
+<!--    <color name="input_bg">#F0F2F5</color>-->
+<!--    <color name="primary_text">#202A35</color>-->
+<!--    <color name="secondary_text">#758292</color>-->
+<!--    <color name="border_color">#DCE2E9</color>-->
+<!--    <color name="button_bg">#202A35</color>-->
+<!--    <color name="button_text">#FFFFFF</color>-->
+<!--    <color name="icon_color">#202A35</color>-->
+<!--    <color name="accent_color">#536779</color>-->
+<!--    <color name="error_color">#D32F2F</color>-->
+<!--</resources>-->

@@ -102,10 +102,11 @@
                 android:layout_marginTop="18dp"
                 android:clickable="true"
                 android:focusable="true"
-                app:cardBackgroundColor="@color/button_bg"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="3dp"
-                app:strokeWidth="0dp">
+                app:cardBackgroundColor="@color/glass_bg"
+                app:cardCornerRadius="22dp"
+                app:cardElevation="6dp"
+                app:strokeColor="@color/glass_border"
+                app:strokeWidth="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -124,7 +125,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="UPLOAD AND PRINT"
-                            android:textColor="@color/button_text"
+                            android:textColor="@color/primary_text"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -133,7 +134,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="9dp"
                             android:text="Upload your document and customize your printing."
-                            android:textColor="@color/button_text"
+                            android:textColor="@color/primary_text"
                             android:textSize="13sp" />
 
                         <TextView
@@ -141,7 +142,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="13dp"
                             android:text="Get Started  →"
-                            android:textColor="@color/button_text"
+                            android:textColor="@color/accent_color"
                             android:textSize="14sp"
                             android:textStyle="bold" />
 
@@ -152,10 +153,10 @@
                         android:layout_height="75dp"
                         android:gravity="center"
                         android:text="PDF"
-                        android:textColor="@color/button_bg"
+                        android:textColor="@color/button_text"
                         android:textSize="24sp"
                         android:textStyle="bold"
-                        android:background="@drawable/bg_button_outline" />
+                        android:background="@drawable/bg_button" />
 
                 </LinearLayout>
 
@@ -179,15 +180,15 @@
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/btnFindShops"
                     android:layout_width="0dp"
-                    android:layout_height="145dp"
-                    android:layout_weight="1"
+                    android:layout_height="match_parent"
                     android:layout_marginEnd="7dp"
+                    android:layout_weight="1"
                     android:clickable="true"
                     android:focusable="true"
-                    app:cardBackgroundColor="@color/card_bg"
-                    app:cardCornerRadius="18dp"
-                    app:cardElevation="2dp"
-                    app:strokeColor="@color/border_color"
+                    app:cardBackgroundColor="@color/glass_bg"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="4dp"
+                    app:strokeColor="@color/glass_border"
                     app:strokeWidth="1dp">
 
                     <LinearLayout
@@ -233,10 +234,10 @@
                     android:layout_marginStart="7dp"
                     android:clickable="true"
                     android:focusable="true"
-                    app:cardBackgroundColor="@color/card_bg"
-                    app:cardCornerRadius="18dp"
-                    app:cardElevation="2dp"
-                    app:strokeColor="@color/border_color"
+                    app:cardBackgroundColor="@color/glass_bg"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="5dp"
+                    app:strokeColor="@color/glass_border"
                     app:strokeWidth="1dp">
 
                     <LinearLayout
@@ -280,10 +281,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="22dp"
-                app:cardBackgroundColor="@color/card_bg"
-                app:cardCornerRadius="18dp"
-                app:cardElevation="1dp"
-                app:strokeColor="@color/border_color"
+                app:cardBackgroundColor="@color/glass_bg"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="4dp"
+                app:strokeColor="@color/glass_border"
                 app:strokeWidth="1dp">
 
                 <LinearLayout

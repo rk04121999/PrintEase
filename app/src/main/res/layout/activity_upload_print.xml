@@ -4,13 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/app_bg"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:clipToPadding="false">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:padding="20dp"
+        android:paddingBottom="28dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,7 +24,7 @@
                 android:id="@+id/ivBack"
                 android:layout_width="44dp"
                 android:layout_height="44dp"
-                android:background="@drawable/bg_card"
+                android:background="@drawable/bg_glass_card"
                 android:clickable="true"
                 android:focusable="true"
                 android:gravity="center"
@@ -30,23 +32,38 @@
                 android:textColor="@color/primary_text"
                 android:textSize="32sp" />
 
-            <TextView
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="14dp"
                 android:layout_weight="1"
-                android:text="Upload AND Print"
-                android:textColor="@color/primary_text"
-                android:textSize="23sp"
-                android:textStyle="bold" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Upload &amp; Print"
+                    android:textColor="@color/primary_text"
+                    android:textSize="23sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:text="Prepare your document for printing"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:text="Upload your document"
+            android:layout_marginTop="28dp"
+            android:text="Your document"
             android:textColor="@color/primary_text"
             android:textSize="19sp"
             android:textStyle="bold" />
@@ -54,11 +71,11 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            app:cardBackgroundColor="@color/card_bg"
-            app:cardCornerRadius="18dp"
-            app:cardElevation="1dp"
-            app:strokeColor="@color/border_color"
+            android:layout_marginTop="13dp"
+            app:cardBackgroundColor="@color/glass_bg"
+            app:cardCornerRadius="22dp"
+            app:cardElevation="4dp"
+            app:strokeColor="@color/glass_border"
             app:strokeWidth="1dp">
 
             <LinearLayout
@@ -69,19 +86,19 @@
                 android:padding="22dp">
 
                 <TextView
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
+                    android:layout_width="68dp"
+                    android:layout_height="68dp"
                     android:background="@drawable/bg_button_outline"
                     android:gravity="center"
                     android:text="PDF"
-                    android:textColor="@color/button_bg"
-                    android:textSize="20sp"
+                    android:textColor="@color/accent_color"
+                    android:textSize="21sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="16dp"
                     android:gravity="center"
                     android:text="Select your PDF document"
                     android:textColor="@color/primary_text"
@@ -89,14 +106,24 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:text="Choose a document from your device"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="12sp" />
+
+                <TextView
                     android:id="@+id/tvFileName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="9dp"
+                    android:layout_marginTop="15dp"
                     android:gravity="center"
                     android:text="No document selected"
-                    android:textColor="@color/secondary_text"
-                    android:textSize="13sp" />
+                    android:textColor="@color/primary_text"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvPageCount"
@@ -112,12 +139,14 @@
                     android:id="@+id/btnSelectPdf"
                     android:layout_width="match_parent"
                     android:layout_height="52dp"
-                    android:layout_marginTop="18dp"
+                    android:layout_marginTop="20dp"
                     android:text="Choose PDF"
                     android:textAllCaps="false"
                     android:textColor="@color/button_text"
+                    android:textSize="15sp"
                     app:backgroundTint="@color/button_bg"
-                    app:cornerRadius="12dp" />
+                    app:cornerRadius="14dp"
+                    app:elevation="2dp" />
 
             </LinearLayout>
 
@@ -126,27 +155,35 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="27dp"
             android:text="Printing preferences"
             android:textColor="@color/primary_text"
             android:textSize="19sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Customize how your document should be printed"
+            android:textColor="@color/secondary_text"
+            android:textSize="12sp" />
+
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            app:cardBackgroundColor="@color/card_bg"
-            app:cardCornerRadius="18dp"
-            app:cardElevation="1dp"
-            app:strokeColor="@color/border_color"
+            android:layout_marginTop="13dp"
+            app:cardBackgroundColor="@color/glass_bg"
+            app:cardCornerRadius="22dp"
+            app:cardElevation="4dp"
+            app:strokeColor="@color/glass_border"
             app:strokeWidth="1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="18dp">
+                android:padding="20dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -160,15 +197,15 @@
                     android:id="@+id/spPaperSize"
                     android:layout_width="match_parent"
                     android:layout_height="52dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/bg_button_outline"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp" />
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_input"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
+                    android:layout_marginTop="21dp"
                     android:text="Print type"
                     android:textColor="@color/primary_text"
                     android:textSize="14sp"
@@ -178,15 +215,15 @@
                     android:id="@+id/spPrintType"
                     android:layout_width="match_parent"
                     android:layout_height="52dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/bg_button_outline"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp" />
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_input"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
+                    android:layout_marginTop="21dp"
                     android:text="Printing sides"
                     android:textColor="@color/primary_text"
                     android:textSize="14sp"
@@ -196,15 +233,15 @@
                     android:id="@+id/spPrintSide"
                     android:layout_width="match_parent"
                     android:layout_height="52dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/bg_button_outline"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp" />
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_input"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
+                    android:layout_marginTop="21dp"
                     android:text="Number of copies"
                     android:textColor="@color/primary_text"
                     android:textSize="14sp"
@@ -212,8 +249,8 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="52dp"
-                    android:layout_marginTop="7dp"
+                    android:layout_height="58dp"
+                    android:layout_marginTop="8dp"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -222,21 +259,24 @@
                         android:layout_width="52dp"
                         android:layout_height="48dp"
                         android:minWidth="0dp"
+                        android:padding="0dp"
                         android:text="−"
                         android:textColor="@color/button_text"
-                        android:textSize="22sp"
+                        android:textSize="23sp"
                         app:backgroundTint="@color/button_bg"
-                        app:cornerRadius="10dp" />
+                        app:cornerRadius="12dp"
+                        app:elevation="2dp" />
 
                     <EditText
                         android:id="@+id/etCopies"
-                        android:layout_width="90dp"
+                        android:layout_width="100dp"
                         android:layout_height="48dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="15dp"
-                        android:background="@drawable/bg_button_outline"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginEnd="18dp"
+                        android:background="@drawable/bg_input"
                         android:gravity="center"
                         android:inputType="number"
+                        android:maxLength="3"
                         android:text="1"
                         android:textColor="@color/primary_text"
                         android:textSize="17sp" />
@@ -246,32 +286,44 @@
                         android:layout_width="52dp"
                         android:layout_height="48dp"
                         android:minWidth="0dp"
+                        android:padding="0dp"
                         android:text="+"
                         android:textColor="@color/button_text"
                         android:textSize="22sp"
                         app:backgroundTint="@color/button_bg"
-                        app:cornerRadius="10dp" />
+                        app:cornerRadius="12dp"
+                        app:elevation="2dp" />
+
                 </LinearLayout>
 
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="27dp"
+            android:text="Price summary"
+            android:textColor="@color/primary_text"
+            android:textSize="19sp"
+            android:textStyle="bold" />
+
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="22dp"
-            app:cardBackgroundColor="@color/card_bg"
-            app:cardCornerRadius="18dp"
-            app:cardElevation="1dp"
-            app:strokeColor="@color/border_color"
+            android:layout_marginTop="13dp"
+            app:cardBackgroundColor="@color/glass_bg"
+            app:cardCornerRadius="22dp"
+            app:cardElevation="4dp"
+            app:strokeColor="@color/glass_border"
             app:strokeWidth="1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="18dp">
+                android:padding="20dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -284,35 +336,38 @@
                     android:id="@+id/tvEstimatedPrice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="7dp"
                     android:text="₹0.00"
                     android:textColor="@color/primary_text"
-                    android:textSize="30sp"
+                    android:textSize="32sp"
                     android:textStyle="bold" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnCalculate"
                     android:layout_width="match_parent"
                     android:layout_height="52dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="18dp"
                     android:text="Calculate Price"
                     android:textAllCaps="false"
                     android:textColor="@color/button_text"
-                    app:backgroundTint="@color/button_bg"
-                    app:cornerRadius="12dp" />
-
+                    android:textSize="15sp"
+                    android:background="@drawable/bg_button"
+                    app:backgroundTint="@null"
+                    app:cornerRadius="14dp"
+                    app:elevation="2dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnContinueToShops"
                     android:layout_width="match_parent"
-                    android:layout_height="52dp"
+                    android:layout_height="54dp"
                     android:layout_marginTop="12dp"
                     android:text="Continue to Print Shops"
                     android:textAllCaps="false"
                     android:textColor="@color/button_text"
+                    android:textSize="15sp"
                     app:backgroundTint="@color/accent_color"
-                    app:cornerRadius="12dp" />
-
+                    app:cornerRadius="14dp"
+                    app:elevation="2dp" />
 
             </LinearLayout>
 
@@ -321,8 +376,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginTop="14dp"
+            android:gravity="center"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
             android:text="Prices shown are sample estimates. Final pricing will depend on the selected print shop."
             android:textColor="@color/secondary_text"
             android:textSize="12sp" />
