@@ -17,6 +17,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.util.Locale;
+
 public class ShopListActivity extends AppCompatActivity {
 
     private FirebaseFirestore db;
@@ -135,6 +137,13 @@ public class ShopListActivity extends AppCompatActivity {
                 true
         );
 
+        TextView rating = createText(
+                "Loading ratings...",
+                14,
+                R.color.accent_color,
+                true
+        );
+
         TextView owner = createText(
                 "Owner: " + safeText(ownerName),
                 14,
@@ -163,18 +172,22 @@ public class ShopListActivity extends AppCompatActivity {
                 true
         );
 
+        rating.setPadding(0, dp(9), 0, 0);
         owner.setPadding(0, dp(12), 0, 0);
         shopAddress.setPadding(0, dp(9), 0, 0);
         contact.setPadding(0, dp(9), 0, 0);
         status.setPadding(0, dp(17), 0, 0);
 
         content.addView(name);
+        content.addView(rating);
         content.addView(owner);
         content.addView(shopAddress);
         content.addView(contact);
         content.addView(status);
 
         card.addView(content);
+
+        loadShopRating(shopId, rating);
 
         card.setOnClickListener(v -> {
             if (!hasPrintDetails) {
@@ -196,12 +209,52 @@ public class ShopListActivity extends AppCompatActivity {
             intent.putExtra("shopAddress", safeText(address));
             intent.putExtra("shopPhone", safeText(phone));
 
-            intent.putExtras(getIntent().getExtras());
+            if (getIntent().getExtras() != null) {
+                intent.putExtras(getIntent().getExtras());
+            }
 
             startActivity(intent);
         });
 
         shopsContainer.addView(card);
+    }
+
+    private void loadShopRating(String shopId, TextView ratingView) {
+        db.collection("shops")
+                .document(shopId)
+                .collection("reviews")
+                .get()
+                .addOnSuccessListener(snapshot -> {
+                    int totalReviews = 0;
+                    int totalRating = 0;
+
+                    for (QueryDocumentSnapshot review : snapshot) {
+                        Long value = review.getLong("rating");
+
+                        if (value != null && value >= 1 && value <= 5) {
+                            totalRating += value.intValue();
+                            totalReviews++;
+                        }
+                    }
+
+                    if (totalReviews == 0) {
+                        ratingView.setText("☆ No reviews yet");
+                    } else {
+                        double average = (double) totalRating / totalReviews;
+
+                        ratingView.setText(
+                                String.format(
+                                        Locale.getDefault(),
+                                        "★ %.1f  •  %d %s",
+                                        average,
+                                        totalReviews,
+                                        totalReviews == 1 ? "review" : "reviews"
+                                )
+                        );
+                    }
+                })
+                .addOnFailureListener(e ->
+                        ratingView.setText("Ratings unavailable"));
     }
 
     private TextView createText(

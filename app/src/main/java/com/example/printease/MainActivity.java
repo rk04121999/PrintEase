@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        getFCMToken();
 
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -53,6 +56,29 @@ public class MainActivity extends AppCompatActivity {
             btnLogin.setText("Please wait...");
             openUserDashboard(currentUser.getUid());
         }
+    }
+
+
+    private void getFCMToken() {
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(task -> {
+
+                    if (!task.isSuccessful()) {
+                        android.util.Log.e(
+                                "FCM_TOKEN",
+                                "Fetching FCM token failed",
+                                task.getException()
+                        );
+                        return;
+                    }
+
+                    String token = task.getResult();
+
+                    android.util.Log.d(
+                            "FCM_TOKEN",
+                            "Device Token: " + token
+                    );
+                });
     }
 
     private void loginUser() {

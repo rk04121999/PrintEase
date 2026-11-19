@@ -1,4 +1,3 @@
-
 package com.example.printease;
 
 import android.app.AlertDialog;
@@ -25,13 +24,16 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.WriteBatch;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class MyOrdersActivity extends AppCompatActivity {
 
@@ -355,7 +357,6 @@ public class MyOrdersActivity extends AppCompatActivity {
             );
 
             stepRow.addView(label);
-
             parent.addView(stepRow);
 
             if (i < steps.length - 1) {
@@ -536,7 +537,12 @@ public class MyOrdersActivity extends AppCompatActivity {
 
         FirebaseUser user = auth.getCurrentUser();
 
-        if (user == null) {
+        if (user == null || !user.getUid().equals(customerId)) {
+            Toast.makeText(
+                    this,
+                    "Please log in again.",
+                    Toast.LENGTH_SHORT
+            ).show();
             return;
         }
 
@@ -556,36 +562,74 @@ public class MyOrdersActivity extends AppCompatActivity {
                         return;
                     }
 
-                    java.util.Map<String, Object> feedbackData =
-                            new java.util.HashMap<>();
+                    String shopId = order.getString("shopId");
 
+                    if (shopId == null || shopId.trim().isEmpty()) {
+                        Toast.makeText(
+                                this,
+                                "Shop information is missing.",
+                                Toast.LENGTH_LONG
+                        ).show();
+                        return;
+                    }
+
+                    Map<String, Object> feedbackData = new HashMap<>();
                     feedbackData.put("orderId", orderId);
                     feedbackData.put("customerId", customerId);
-                    feedbackData.put("shopId", order.getString("shopId"));
+                    feedbackData.put("shopId", shopId);
                     feedbackData.put("rating", rating);
                     feedbackData.put("comment", comment);
                     feedbackData.put("createdAt", FieldValue.serverTimestamp());
 
-                    db.collection("orders")
-                            .document(orderId)
-                            .collection("feedback")
-                            .document(customerId)
-                            .set(feedbackData)
+                    Map<String, Object> publicReviewData = new HashMap<>();
+                    publicReviewData.put("rating", rating);
+                    publicReviewData.put("comment", comment);
+                    publicReviewData.put("createdAt", FieldValue.serverTimestamp());
+
+                    com.google.firebase.firestore.DocumentReference privateFeedbackRef =
+                            db.collection("orders")
+                                    .document(orderId)
+                                    .collection("feedback")
+                                    .document(customerId);
+
+                    com.google.firebase.firestore.DocumentReference publicReviewRef =
+                            db.collection("shops")
+                                    .document(shopId)
+                                    .collection("reviews")
+                                    .document(orderId);
+
+                    WriteBatch batch = db.batch();
+
+                    batch.set(privateFeedbackRef, feedbackData);
+                    batch.set(publicReviewRef, publicReviewData);
+
+                    batch.commit()
                             .addOnSuccessListener(unused -> {
+                                if (isFinishing() || isDestroyed()) {
+                                    return;
+                                }
+
                                 dialog.dismiss();
+
                                 Toast.makeText(
                                         this,
                                         "Thank you for your feedback!",
                                         Toast.LENGTH_SHORT
                                 ).show();
+
                                 loadOrders();
                             })
-                            .addOnFailureListener(e ->
-                                    Toast.makeText(
-                                            this,
-                                            "Unable to submit feedback: " + e.getMessage(),
-                                            Toast.LENGTH_LONG
-                                    ).show());
+                            .addOnFailureListener(e -> {
+                                if (isFinishing() || isDestroyed()) {
+                                    return;
+                                }
+
+                                Toast.makeText(
+                                        this,
+                                        "Unable to submit feedback: " + e.getMessage(),
+                                        Toast.LENGTH_LONG
+                                ).show();
+                            });
                 })
                 .addOnFailureListener(e ->
                         Toast.makeText(
